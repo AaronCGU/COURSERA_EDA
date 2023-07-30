@@ -1,0 +1,76 @@
+---
+title: "Estudio descriptivo de las valoraciones de AirBnB"
+author: "Reportes con R - Clase 2"
+date: "2022-11-26"
+output:
+  html_document:
+    df_print: paged
+    code_folding: hide
+  pdf_document: default
+---
+
+\pagebreak
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# 1. Cargar los datos de mi dataset 
+
+URL  : [AirBnB](https://raw.githubusercontent.com/robintux/Datasets4StackOverFlowQuestions/master/AirBnB_Valoraciones.csv)
+
+
+``` {r, message = FALSE}
+library(tidyverse)
+data1 <- read.csv("https://raw.githubusercontent.com/robintux/Datasets4StackOverFlowQuestions/master/AirBnB_Valoraciones.csv")
+head(data1, 10)
+``` 
+
+
+# 2. Nombres de las columnas 
+
+Para empezar con un estudio descriptivo de nuestro dataset, empezamos sabiendo los nombres de las variables.
+
+```{r}
+colnames(data1)
+```
+
+# 3. Estructura del dataframe
+
+Usaremos la funcion `str`.
+
+```{r}
+str(data1)
+```
+
+# 4. Variable cuantitativa : reviews_per_month
+
+Veamos un analisis univariado.
+
+- Resumen descriptivo
+
+``` {r}
+summary(data1)
+``` 
+
+- Boxplot
+
+```{r}
+boxplot(data1$reviews_per_month,
+        main = "NUmero de Reviews por mes")
+```
+
+- Histograma 
+
+```{r}
+hist(data1$reviews_per_month,
+        main = "NUmero de Reviews por mes")
+```
+
+- Ejemplo usando ggplot: reviews_per_month vs price
+```{r}
+ggplot(data = data1, mapping = aes(x = reviews_per_month,
+                                   y = price))+
+  geom_point()
+```
